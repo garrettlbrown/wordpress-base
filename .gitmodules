@@ -1,0 +1,3 @@
+[submodule "vendor/vagrantfile"]
+	path = vendor/vagrantfile
+	url = git@github.com:daftlabs/vagrantfile.git
