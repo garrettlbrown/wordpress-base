@@ -7,8 +7,7 @@ include_recipe 'apache2'
 include_recipe "apache2::mod_rewrite"
 include_recipe "apache2::mod_php5"
 
-project = 'wordpress'
-docroot = "/var/www/#{project}"
+docroot = "/var/www/" + node.wordpress.name
 webroot = "#{docroot}/public"
 
 package 'php5-mysql' do
@@ -27,7 +26,7 @@ execute "mysql -u root -p#{node.database.pass} #{node.database.name} < database.
   cwd docroot
 end
 
-web_app project do
+web_app node.wordpress.name do
   docroot webroot 
 end
 

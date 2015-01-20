@@ -7,3 +7,4 @@ default['mysql']['tunable']['max_allowed_packet'] = "256M"
 default['mysql']['bind_address']                  = "localhost"
 
 default['wordpress']['themes_directory']          = "/var/www/wordpress/themes" 
+default['wordpress']['name']                      = "wordpress" 
