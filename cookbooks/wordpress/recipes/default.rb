@@ -38,6 +38,14 @@ ark 'public' do
   not_if do File.directory?(webroot) end
 end
 
+Dir.foreach(node.wordpress.themes_directory) do |item|
+  next if item == '.' or item == '..'
+
+  link webroot + '/wp-content/themes/' + item do
+    to node.wordpress.themes_directory + '/' + item 
+  end
+end
+
 template "#{webroot}/wp-config.php" do
   source "wp-config.php.erb"
   variables(
