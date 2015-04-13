@@ -21,10 +21,11 @@ include_recipe "mysql::client"
 
 execute "mysql -u root -p#{node.database.pass} -e \"create database if not exists #{node.database.name};\""
 
-execute "mysql -u root -p#{node.database.pass} #{node.database.name} < database.sql" do
-  not_if "mysql -u root -p#{node.database.pass} #{node.database.name} -e 'show tables' | grep 'wp'"
-  cwd docroot
-end
+# How to change this to only run if database.sql is present (otherwise, let us use the WP installer)?
+#execute "mysql -u root -p#{node.database.pass} #{node.database.name} < database.sql" do
+#  not_if "mysql -u root -p#{node.database.pass} #{node.database.name} -e 'show tables' | grep 'wp'"
+#  cwd docroot
+#end
 
 web_app node.wordpress.name do
   docroot webroot 
@@ -37,11 +38,11 @@ ark 'public' do
   not_if do File.directory?(webroot) end
 end
 
-Dir.foreach(node.wordpress.themes_directory) do |item|
+Dir.foreach(node.wordpress.content_directory) do |item|
   next if item == '.' or item == '..'
 
-  link webroot + '/wp-content/themes/' + item do
-    to node.wordpress.themes_directory + '/' + item 
+  link webroot + '/wp-content/' + item do
+    to node.wordpress.content_directory + '/' + item 
   end
 end
 

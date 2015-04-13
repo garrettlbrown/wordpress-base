@@ -6,5 +6,6 @@ default["mysql"]["tunable"]["wait_timeout"]       = "3600"
 default['mysql']['tunable']['max_allowed_packet'] = "256M"
 default['mysql']['bind_address']                  = "localhost"
 
-default['wordpress']['themes_directory']          = "/var/www/wordpress/themes" 
-default['wordpress']['name']                      = "wordpress" 
+default['wordpress']['themes_directory']          = "/var/www/wordpress-base/themes" 
+default['wordpress']['content_directory']         = "/var/www/wordpress-base/wp-content" 
+default['wordpress']['name']                      = "wordpress-base" 
