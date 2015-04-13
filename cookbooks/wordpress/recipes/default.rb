@@ -22,8 +22,8 @@ include_recipe "mysql::client"
 execute "mysql -u root -p#{node.database.pass} -e \"create database if not exists #{node.database.name};\""
 
 execute "mysql -u root -p#{node.database.pass} #{node.database.name} < database.sql" do
-  not_if "mysql -u root -p#{node.database.pass} #{node.database.name} -e 'show tables' | grep 'wp'"
-  cwd docroot
+ not_if { !File.exist?("database.sql") || "mysql -u root -p#{node.database.pass} #{node.database.name} -e 'show tables' | grep '#{node['database']['prefix']}'" }
+ cwd docroot
 end
 
 web_app node.wordpress.name do
@@ -37,12 +37,13 @@ ark 'public' do
   not_if do File.directory?(webroot) end
 end
 
-Dir.foreach(node.wordpress.themes_directory) do |item|
-  next if item == '.' or item == '..'
+directory webroot + '/wp-content' do
+  recursive true
+  action :delete
+end
 
-  link webroot + '/wp-content/themes/' + item do
-    to node.wordpress.themes_directory + '/' + item 
-  end
+link webroot + '/wp-content' do
+  to node.wordpress.content_directory 
 end
 
 template "#{webroot}/wp-config.php" do
