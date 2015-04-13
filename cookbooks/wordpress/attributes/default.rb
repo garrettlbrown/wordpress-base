@@ -8,4 +8,5 @@ default['mysql']['bind_address']                  = "localhost"
 
 default['wordpress']['themes_directory']          = "/var/www/wordpress-base/themes" 
 default['wordpress']['content_directory']         = "/var/www/wordpress-base/wp-content" 
-default['wordpress']['name']                      = "wordpress-base" 
+default['wordpress']['name']                      = "wordpress-base"
+default['database']['prefix'] = 'wp_'
