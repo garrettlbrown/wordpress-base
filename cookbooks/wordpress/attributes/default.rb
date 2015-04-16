@@ -13,3 +13,4 @@ default['database']['prefix']                     = 'wp_'
 
 default['multisite']                              = false
 default['multisite_domain']                       = 'mysite.com'
+default['multisite_subdomain']                    = false
