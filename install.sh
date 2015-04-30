@@ -2,7 +2,7 @@
 
 repo=$1
 project_name=`echo $repo | sed -E 's/.*\/(.*)\.git/\1/'`
-project_name=`echo $project_name | sed -E 's/\-/_/'`
+project_name=`echo $project_name | sed -E 's/[\-\.]/_/'`
 project_name=`echo $project_name | tr '[:upper:]' '[:lower:]'`
 
 echo "git url:      $repo"
@@ -24,8 +24,7 @@ git remote set-url origin $repo
 
 echo "updating everything"
 LC_ALL=C find . -type f -not -empty -not -path './.git*' -exec sed -i '' "s/wordpress\-base/$project_name/g" {} +
-#@TODO: do we even need this for WordPress?
-mv cookbooks/wordpress cookbooks/$project_name
+#mv cookbooks/wordpress cookbooks/$project_name
 
 echo "creating inital commit"
 git checkout --orphan newmaster

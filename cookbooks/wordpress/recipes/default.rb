@@ -43,7 +43,7 @@ directory webroot + '/wp-content' do
 end
 
 link webroot + '/wp-content' do
-  to node.wordpress.content_directory 
+  to docroot + '/' + node.wordpress.content_directory 
 end
 
 template "#{webroot}/wp-config.php" do
