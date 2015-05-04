@@ -24,7 +24,6 @@ git remote set-url origin $repo
 
 echo "updating everything"
 LC_ALL=C find . -type f -not -empty -not -path './.git*' -exec sed -i '' "s/wordpress\-base/$project_name/g" {} +
-#mv cookbooks/wordpress cookbooks/$project_name
 
 echo "creating inital commit"
 git checkout --orphan newmaster

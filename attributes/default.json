@@ -2,6 +2,16 @@
 	"run_list": ["recipe[wordpress]"],
 	"mysql": {
 		"server_root_password": "password"
-	}
+	},
+  "wordpress": {
+    "name": "wordpress-base",
+    "content_directory": "wp-content"
+  },
+  "database": {
+    "prefix": "wp_"
+  },
+  "multisite": false,
+  "multisite_domain": "",
+  "multisite_subdomain": false
 }
 
