@@ -27,6 +27,7 @@ execute "mysql -u root -p#{node.database.pass} #{node.database.name} < database.
 end
 
 web_app node.wordpress.name do
+  allow_override "all"
   docroot webroot 
 end
 
