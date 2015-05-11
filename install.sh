@@ -2,7 +2,7 @@
 
 repo=$1
 project_name=`echo $repo | sed -E 's/.*\/(.*)\.git/\1/'`
-project_name=`echo $project_name | sed -E 's/[\-\.]/_/'`
+project_name=`echo $project_name | sed -E 's/\-/_/'`
 project_name=`echo $project_name | tr '[:upper:]' '[:lower:]'`
 
 echo "git url:      $repo"
